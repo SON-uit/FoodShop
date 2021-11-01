@@ -1,49 +1,56 @@
 <%- layout('./layout/template') %>
-<link rel="stylesheet" type="text/css" href="/css/productDetail.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/productDetail.css" />
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous"
+/>
 <div class="product-page">
-    <div class="product-container">
-        <div class="field-back">
-            <a href="/home"><button class="btn-back" title="Quay lại" >
-                ←
-                Quay lại
-            </button></a>
-        </div>
-        <div class="product-category-detail">
-            <div class="field-img">
-                <div class="item">
-                    <img src="<%= product.images[0].url %>" alt="<%= product.slug %>" >
-                </div>
-            </div>
-            <div class="field-content">
-                <div class="field-breadcrumb">
-                    
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href=" ">Trang chủ</a></li>
-                       
-                        <li class="breadcrumb-item"><a href="">Danh mục</a></li>
-                   
-                        <li class="breadcrumb-item"><a href="">Hamburger</a></li>
-           
-                        <li class="breadcrumb-item active" aria-current="page">Hamburger 3 tầng</li>
-                       
-                    </ol>
-                </div>
-                <h2><%= product.name %> </h2>
-                <div class="field-price">
-                    <span><%= product.price %> </span>
-                </div>
-                <div class="field-note">
-                    <div class="field-text">
-                        <p><%= product.description %> </p>
-                    </div>
-                </div>
-                <div class="quantity">
-                    <div class="product-quanti">Số lượng: </div>
-                    <input type="number" readonly value = "1">
-                </div>
-                <button class="add-bt"> Thêm vào giỏ hàng</button>
-            </div>
-        </div>
+  <div class="product-container">
+    <div class="field-back">
+      <a href="/home"
+        ><button class="btn-back" title="Quay lại">← Quay lại</button></a
+      >
     </div>
+    <div class="product-category-detail">
+      <div class="field-img">
+        <div class="item">
+          <img src="<%= product.images[0].url %>" alt="<%= product.slug %>" />
+        </div>
+      </div>
+      <div class="field-content">
+        <div class="field-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href=" ">Trang chủ</a></li>
+
+            <li class="breadcrumb-item"><a href="">Danh mục</a></li>
+
+            <li class="breadcrumb-item"><a href="">Hamburger</a></li>
+
+            <li class="breadcrumb-item active" aria-current="page">
+              Hamburger 3 tầng
+            </li>
+          </ol>
+        </div>
+        <h2><%= product.name %></h2>
+        <div class="field-price">
+          <span><%= product.price %> </span>
+        </div>
+        <div class="field-note">
+          <div class="field-text">
+            <p><%= product.description %></p>
+          </div>
+        </div>
+        <div class="quantity">
+          <div class="product-quanti">Số lượng:</div>
+          <input type="number" readonly value="1" />
+        </div>
+        <button class="add-bt" onclick="addCart('<%= product.id%>')">
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+

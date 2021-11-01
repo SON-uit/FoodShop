@@ -54,17 +54,20 @@ function showCart() {
 }
 popup();
 let Cart = document.querySelector("#cart");
-function addCart(id) {
-  const idProduct = id;
-  axios
-    .get(`api/product/addCart/${idProduct}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function addCart(id) {
+  try {
+    const idProduct = id;
+    const response  = await axios({
+      method: "GET",
+      url: "http://localhost:3000/api/product/addCart/"+ idProduct,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
 function deleteItems(id) {
   const idProduct = id;
@@ -79,7 +82,6 @@ function deleteItems(id) {
     .catch((error) => console.log(error));
 }
 function changeQtyItems(el) {
-  console.log(el.id, el.value);
   axios
     .get(`api/product/editQtyItem/${el.id}/qty/${el.value}`)
     .then((response) => {
