@@ -1,0 +1,73 @@
+<%- layout('./layout/template') %>
+<link rel="stylesheet" type="text/css" href="/css/order.css">
+<section class="order" id="order">
+    <div>
+        <h1 class="heading"><span>Order Now</span></h1>
+    </div>
+    <div class="row"> 
+        <form action="">
+            <div class="inputBox">
+                <div class="input">
+                    <span>Tên</span>
+                    <input type="text" placeholder="name">
+                    <input type="email" placeholder="email">
+                </div>
+                <div class="input">
+                    <span>Số điện thoại</span>
+                    <input type="text" placeholder="number">
+                </div>  
+            </div>
+            <div class="inputBox">
+                <div class="input">
+                    <span>Địa chỉ</span>
+                    <textarea placeholder="address" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+                <div class="input">
+                    <span>Message</span>
+                    <textarea placeholder="" name="" id="" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </form>
+        <form action="">
+            <div id="myModal" class="inputBox">
+                <div class="modal-body">
+                    <span>Your order</span>
+                    <div class="cart-row">
+                        <span class="cart-item cart-header cart-column">Sản Phẩm</span>
+                        <span class="cart-price cart-header cart-column">Giá</span>
+                        <span class="cart-quantity cart-header cart-column">Số Lượng</span>
+                    </div>
+                    <div class="cart-items">
+                        <% if (cart) { %> 
+                            <% for ( product of cart.listProduct) { %> 
+                                <div class="cart-row">
+                                    <div class="cart-item cart-column">
+                                        <img class="cart-item-image" src="<%= product.info.images[0].url %>" alt="<%= product.slug %> " width="100" height="100">
+                                        <span class="cart-item-title"><%= product.name %> </span>
+                                    </div>
+                                    <span class="cart-price cart-column"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)  %></span>
+                                    <div class="cart-quantity cart-column">
+                                        <input class="cart-quantity-input" type="number" value="<%= product.qty %>" readonly>
+                                        <button class="btn btn-danger" type="button">Xóa</button>
+                                    </div>
+                                </div>
+                            <% } %>
+                        <% } %>  
+                    <div class="cart-total">
+                        <strong class="cart-total-title">Tổng Cộng: </strong>
+                        <span class="cart-total-price"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.totalPrice)%></span>
+                    </div>
+                </div>
+                <div>
+                    <div class="input">
+                        <span>Ngày và giờ</span>
+                        <input type="datetime-local">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn order">Thanh Toán</button>
+                </div>  
+            </div>
+        </form>
+    </div>
+</section>

@@ -1,0 +1,71 @@
+.heading{
+    margin-top: 10rem;
+}
+.order .heading span {
+    text-align: center;
+    font-size: 5rem;
+    color:var(--black);
+    
+}
+.order .row {
+    padding: 2rem;
+    box-shadow: 0 5rem 1rem rgba(0, 0, 0, 1);
+    background: #fff;
+    display: grid;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-radius: 5rem;
+    grid-template-columns: 1fr 1fr;
+}
+.order .row form {
+    max-width: 90rem;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    border:.1rem solid rgba(0, 0, 0, .2);
+    background: #fff;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+.order .row form .inputBox{
+    display: grid;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+}
+.order .row form .inputBox .input {
+    width: 49%;
+}
+
+.order form .inputBox span{
+    display: block;
+    padding: .5rem 0;
+    font-size: 1.5rem;
+    color: var(--light-color);
+
+}
+.order .row form .inputBox .input input,
+.order .row form .inputBox .input textarea{
+    background: #eee;
+    border-radius: .5rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+    color: var(--black);
+    text-transform: none;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.order .row form .inputBox .input textarea {  
+    resize: none;
+    height: 10rem;
+    width: 50rem;
+}
+.order .row form .btn {
+    margin-top: 0;
+    background: none;
+}
+.order .row .form .btn:hover{
+    background: var(--red);
+}
+.order .row .form .inputBox input{
+    width: 100%;
+}
