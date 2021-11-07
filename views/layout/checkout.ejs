@@ -5,29 +5,32 @@
         <h1 class="heading"><span>Order Now</span></h1>
     </div>
     <div class="row"> 
+        <% if(user!== null) { %> 
         <form action="">
             <div class="inputBox">
                 <div class="input">
                     <span>Tên</span>
-                    <input type="text" placeholder="name">
-                    <input type="email" placeholder="email">
+                    <input type="text" placeholder="name" value="<%=user.username%>" name="username">
+                    <span>Tên</span>
+                    <input type="email" placeholder="email" value= "<%=user.email%>" name="email"> >
                 </div>
                 <div class="input">
                     <span>Số điện thoại</span>
-                    <input type="text" placeholder="number">
+                    <input type="text" placeholder="number" value= "<%= user.phone %>" name="phone">
                 </div>  
             </div>
             <div class="inputBox">
                 <div class="input">
                     <span>Địa chỉ</span>
-                    <textarea placeholder="address" name="" id="" cols="30" rows="10"></textarea>
+                    <textarea placeholder="address" name="address" id="" cols="30" rows="10" ><%= user.address %> </textarea>
                 </div>
                 <div class="input">
                     <span>Message</span>
-                    <textarea placeholder="" name="" id="" cols="30" rows="10"></textarea>
+                    <textarea placeholder="" name="message" id="" cols="30" rows="10"></textarea>
                 </div>
             </div>
         </form>
+        <% } %> 
         <form action="">
             <div id="myModal" class="inputBox">
                 <div class="modal-body">
@@ -61,13 +64,43 @@
                 <div>
                     <div class="input">
                         <span>Ngày và giờ</span>
-                        <input type="datetime-local">
+                        <input type="datetime-local" name="date">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn order">Thanh Toán</button>
+                    <button id="order" type="button" class="btn order">Thanh Toán</button>
                 </div>  
             </div>
         </form>
     </div>
 </section>
+<script>
+const btnOrder = document.querySelector('button[id="order"]');
+const order = async function (data) {
+  try {
+    const response = await axios({
+        url: 'http://localhost:3000/api/product/order',
+        method: 'POST',
+        data,
+    })
+    if (response.data.status === 'success') {
+       alert(response.data.message);
+       window.setTimeout(() => {
+         location.assign('/home')
+       }, 1000);
+    }
+  } catch (error) {
+    alert(error);
+  }
+}
+btnOrder.addEventListener('click', function(e) {
+  e.preventDefault();
+  const username = document.querySelector('input[name="username"]').value;
+  const email = document.querySelector('input[name="email"]').value;
+  const phone = document.querySelector('input[name="phone"]').value;
+  const address = document.querySelector('textarea[name="address"]').value;
+  const message = document.querySelector('textarea[name="message"]').value;
+  const date = document.querySelector('input[name="date"]').value;
+  order({username,email,phone,address,message,date});
+})
+</script>

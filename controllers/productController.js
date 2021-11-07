@@ -1,9 +1,12 @@
 const Category = require('../models/categoryModel');
 const Product = require('../models/productModel');
+const User = require('../models/userModel');
+const Order = require('../models/orderModel');
+const OrderProduct = require('../models/orderProductModel');
 const catchAsync = require('../utils/catchAsync');
 const Cart = require('../cart');
 const AppError = require('../utils/appError');
-
+const Email = require('../utils/sendEmail');
 module.exports.createNewProduct = catchAsync(async (req, res, next) => {
   let idCategory;
   if (req.params.categoryID) idCategory = req.params.categoryID;
@@ -95,3 +98,55 @@ module.exports.editQtyItem = (req, res, next) => {
   res.locals.cart = cart;
   res.render('cart/index')
 };
+module.exports.order = catchAsync(async (req, res, next) => {
+  const { username, email, phone, address, message, date } = req.body;
+  const user = await User.findOne({ email: email });
+  const order = new Order({
+    user: user.id,
+    message,
+    phone,
+    address,
+    date,
+    totalPrice: req.session.cart.totalPrice,
+    totalQty: req.session.cart.totalQuantity
+  })
+  await order.save()
+  req.session.cart.listProduct.forEach(async (product) =>  {
+    const orderProduct = new OrderProduct({
+      order: order.id,
+      product: product.id, 
+      qty: product.qty,
+    })
+  await orderProduct.save();
+  })
+  try {
+    const url = "http://localhost:3000/home";
+    const data = req.session.cart;
+    const sendEmail = new Email(user,url,data);
+    await sendEmail.sendMail();
+  } catch (err) {
+    console.log(err);
+  }
+  res.clearCookie('session');
+  res.status(200).json({
+    status: 'success',
+    message: 'Order successfuly'
+  });
+})
+module.exports.bestSeller = catchAsync(async (req, res, next) => {
+  const bestSeller = await OrderProduct.aggregate()
+    .group({
+      _id: '$product',
+      sumQty: { $sum: '$qty'}
+    })
+    .sort({sumQty: -1})
+    .limit(5);
+  const result = await Promise.all(bestSeller.map(async function (el) {
+    const product = await Product.findById(el._id);
+    return product;
+  }));
+  res.status(200).json({
+    status: 'success',
+    data: result,
+  })
+})

@@ -2,7 +2,7 @@ const Category = require('../models/categoryModel');
 const Product = require('../models/productModel');
 const catchAsync = require('../utils/catchAsync');
 module.exports.home = catchAsync(async (req, res, next) => {
-  const products = await Product.find();
+  const products = await Product.find() ;
   res.render('layout/home', { products });
 });
 module.exports.signupForm = (req, res) => {
