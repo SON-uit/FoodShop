@@ -1,27 +1,17 @@
-
-const loginForm = document.querySelector('#Loginform');
-const regisForm = document.querySelector('#Regform');
-//ALERT
-const hideAlert = () => {
-  const el = document.querySelector('.alert');
-  if (el) el.parentElement.removeChild(el);
-}
-const showAlert = (type, message) => {
-  hideAlert();
-  const markup = `<div class="alert alert--${type}">${message}</div>`;
-  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-  window.setTimeout(hideAlert, 3000);
-}
+var Loginform = document.getElementById("Loginform");
+var Regform = document.getElementById("Regform");
+var Indicator = document.getElementById("Indicator");          
+    function register(){
+      Regform.style.transform = "translateX(0px)";
+      Loginform.style.transform = "translateX(0px)";
+      Indicator.style.transform = "translateX(100px)";
+    }
+    function login(){
+      Regform.style.transform = "translateX(450px)";
+      Loginform.style.transform = "translateX(475px)";
+      Indicator.style.transform = "translateX(-10px)";
+    }
 //DISPLAY FORM FOR USER
-loginForm.classList.add('hidden');
-function login() {
-    loginForm.classList.toggle("hidden");
-    regisForm.classList.toggle("hidden");
-  }
-function register() {
-  loginForm.classList.toggle("hidden");
-  regisForm.classList.toggle("hidden");
-}
 // HANDLE FORM
 
 const loginUser = async (email, password) => {
