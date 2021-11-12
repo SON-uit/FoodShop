@@ -196,7 +196,7 @@ h5.modal-title {
     display: flex;
     align-items: center;
     border-bottom: 1px solid black;
-    margin-right: 1.5em;
+    margin-right: 0.1em;
     padding-bottom: 10px;
     margin-top: 10px;
 }
@@ -204,7 +204,6 @@ h5.modal-title {
 .cart-row {
     display: flex;
 }
-
 .cart-item {
     width: 45%;
 }
@@ -216,7 +215,7 @@ h5.modal-title {
 }
 
 .cart-quantity {
-    width: 35%;
+    width: 25%;
 }
 
 .cart-item-title {
@@ -226,7 +225,7 @@ h5.modal-title {
 }
 
 .cart-item-image {
-    width: 75px;
+    width: 70px;
     height: auto;
     border-radius: 10px;
 }
@@ -235,7 +234,9 @@ h5.modal-title {
     color: white;
     background-color: #EB5757;
     border: none;
-    border-radius: .3em;
+    width: 16%;
+    height: 45px;
+    border-radius: .2em;
     font-weight: bold;
 }
 
@@ -253,7 +254,7 @@ h5.modal-title {
     padding: 0;
     text-align: center;
     font-size: 1.2em;
-    margin-right: 25px;
+    margin-left: 25px;
 }
 
 .cart-row:last-child {
@@ -272,7 +273,7 @@ h5.modal-title {
 
 .cart-total-title {
     font-weight: bold;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: black;
     margin-right: 20px;
 }
