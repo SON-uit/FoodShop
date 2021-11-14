@@ -10,7 +10,8 @@
     <h3>Thanks For Your Order</h3>
     <h4>Hi <%= username %> </h1>
     <p> Your item(s) will be shipped soon</p>
-    <table>
+    <h4> Your cart is </h4>
+    <table border="1" cellspacing="0">
         <thead>
             <th>Name</th>
             <th>Qty</th>
@@ -22,13 +23,15 @@
                 <tr>
                     <td><%= product.name %> </td>
                     <td><%= product.qty %> </td>
-                    <td><%= product.info.price %> </td>
-                    <td><%= product.price %> </td>
+                    <td><%=new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.info.price)%> </td>
+                    <td><%=new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)%> </td>
                 </tr>
             <% } %> 
         </tbody>
     </table>
-    <h2>Your total bill is: <%= data.totalPrice %> </h2>
-    Here to back our website<h2><%= url %></h2>
+    <h2>Your total bill is: 
+        <span style="color:red"><%=new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalPrice) %> </span>
+    </h2>
+    <a href="<%= url %>"><button> Here to back our website</button></a>
 </body>
 </html>

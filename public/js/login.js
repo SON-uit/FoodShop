@@ -1,19 +1,30 @@
-var Loginform = document.getElementById("Loginform");
-var Regform = document.getElementById("Regform");
-var Indicator = document.getElementById("Indicator");          
+
+const LoginForm = document.querySelector('#Loginform');
+const Regform = document.querySelector('#Regform');
+const Indicator = document.querySelector('#Indicator');          
     function register(){
       Regform.style.transform = "translateX(0px)";
-      Loginform.style.transform = "translateX(0px)";
+      LoginForm.style.transform = "translateX(0px)";
       Indicator.style.transform = "translateX(100px)";
     }
     function login(){
       Regform.style.transform = "translateX(450px)";
-      Loginform.style.transform = "translateX(475px)";
+      LoginForm.style.transform = "translateX(475px)";
       Indicator.style.transform = "translateX(-10px)";
     }
 //DISPLAY FORM FOR USER
+// ALERT ///
+const hideAlert = () => { 
+  const el = document.querySelector('.alert');
+  if (el) el.parentElement.removeChild(el);
+};
+const showAlert = (type, message) => {
+  hideAlert();
+  const markup = `<div class="alert alert--${type}">${message}</div>`;
+  document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
+  window.setTimeout(hideAlert, 2000);
+}
 // HANDLE FORM
-
 const loginUser = async (email, password) => {
   try {
   const response = await axios ({
@@ -34,11 +45,11 @@ const loginUser = async (email, password) => {
     showAlert('failed', err.response.data.message);
   }
 }
-loginForm.addEventListener('submit', (e) => {
+LoginForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const email = e.target.querySelector('input[name="email"]').value;
   const password = e.target.querySelector('input[name="password"]').value;
-  loginUser(email,password);
+  loginUser(email,password); 
 })
 //RESGISTER
 const registerUser = async (data) => {
@@ -58,7 +69,7 @@ const registerUser = async (data) => {
     showAlert('failed', err.response.data.message);
   }
 }
-regisForm.addEventListener('submit', (e) => {
+Regform.addEventListener('submit', (e) => {
   e.preventDefault();
   const username = e.target.querySelector('input[name="username"]').value;
   const email = e.target.querySelector('input[name="email"]').value;
