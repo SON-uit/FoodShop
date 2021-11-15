@@ -1,21 +1,20 @@
-.heading{
-    margin-top: 10rem;
+.order .heading{
+    margin-top: 90px;
 }
 .order .heading span {
     text-align: center;
     font-size: 5rem;
     color:var(--black);
-    
 }
 .order .row {
     padding: 2rem;
     box-shadow: 0 5rem 1rem rgba(0, 0, 0, 1);
     background: #fff;
-    display: grid;
+    display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     border-radius: 5rem;
-    grid-template-columns: 1fr 1fr;
+    width: 100%;
 }
 .order .row form {
     max-width: 90rem;
@@ -25,6 +24,7 @@
     background: #fff;
     margin: 0 auto;
     padding: 1.5rem;
+    
 }
 .order .row form .inputBox{
     display: grid;
@@ -33,7 +33,7 @@
     
 }
 .order .row form .inputBox .input {
-    width: 49%;
+    width: 80%;
 }
 
 .order form .inputBox span{
@@ -59,13 +59,50 @@
     height: 10rem;
     width: 50rem;
 }
-.order .row form .btn {
-    margin-top: 0;
-    background: none;
-}
-.order .row .form .btn:hover{
-    background: var(--red);
-}
+
 .order .row .form .inputBox input{
     width: 100%;
 }
+
+.cart-item {
+    width: 140px;
+}
+
+.cart-price {
+    width: 75px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.cart-quantity {
+    width: 105px;
+}
+
+.cart-total-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: black;
+}
+
+.cart-column {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+}
+
+.modal .cart-item {
+    width: 100%;
+}
+.modal.modalOrdered {
+    display: block;
+}
+.open {
+    display: block;
+}
+
+
+
+

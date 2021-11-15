@@ -5,7 +5,7 @@
         <h1 class="heading"><span>Order Now</span></h1>
     </div>
     <div class="row"> 
-        <form action="">
+        <form action="" class="form1">
             <div class="inputBox">
                 <div class="input">
                     <span>Tên</span>
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </form>
-        <form action="">
+        <form action="" class="form2">
             <div id="myModal" class="inputBox">
                 <div class="modal-body">
                     <span>Your order</span>
@@ -48,7 +48,6 @@
                                     <span class="cart-price cart-column"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)  %></span>
                                     <div class="cart-quantity cart-column">
                                         <input class="cart-quantity-input" type="number" value="<%= product.qty %>" readonly>
-                                        <button class="btn btn-danger" type="button">Xóa</button>
                                     </div>
                                 </div>
                             <% } %>
@@ -65,9 +64,40 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn order">Thanh Toán</button>
+                    <button type="button" class="btn order">Đặt hàng</button>
                 </div>  
             </div>
         </form>
     </div>
+    <div class="modal modalOrdered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đã đặt hàng thành công</h5>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <div class="cart-row">
+                    <div class="cart-item cart-column">
+                        <img class="cart-item-image" src="img/p-1.jpg" alt="burger" width="100" height="100">
+                        <span class="cart-item-title">Burger 3 tầng</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-back" >Quay lại</button>
+            </div>
+        </div>
+        
+    </div>
+    
 </section>
+<script>
+    const modal = document.querySelector(".modalOrdered")
+    const btn = document.querySelector(".btn-ordered")
+
+    btn.addEventListener('click', showOrdered)
+    function showOrdered() {
+    modal.classList.add('open')
+}
+</script>
+
