@@ -214,7 +214,19 @@ sort.addEventListener("click", function (e) {
     if (!(price > min && price < max)) {
       product.style.display = "none";
     }
-    sort.classList.remove("show");
+  }
+  sort.classList.remove("show");
+  // Check if don't have product with sort
+  const temp = [...products]
+  if(temp.every(el => el.style.display === "none")) {
+    const message = document.createElement('h2');
+    message.textContent = 'Không tìm thấy kết quả';
+    boxContainer.append(message);
+  } else {
+    if (boxContainer.hasChildNodes('h2')) {
+      const h2 = boxContainer.querySelector('h2');
+      boxContainer.removeChild(h2);
+    }
   }
 });
 const sortApha = document.querySelectorAll(".sortAlpha");

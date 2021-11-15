@@ -92,6 +92,7 @@ function changeQtyItems(el) {
     })
     .catch((error) => console.log(error));
 }
+//LOG OUT USER
 const btnLogout = document.querySelector('.btn-logout');
 const logout = async function ()  {
   try {

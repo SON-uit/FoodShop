@@ -147,8 +147,4 @@ module.exports.bestSeller = catchAsync(async (req, res, next) => {
     return product;
   }));
   res.send(result);
-  /* res.status(200).json({
-    status: 'success',
-    data: result,
-  }) */
 })
