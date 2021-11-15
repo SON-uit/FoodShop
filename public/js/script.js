@@ -113,4 +113,7 @@ if (btnLogout) {
     logout();
   })
 }
-  
+function menuToggle(){
+  const toggleMenu = document.querySelector('.list');
+  toggleMenu.classList.toggle('active')
+}

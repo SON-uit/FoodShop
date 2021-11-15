@@ -84,7 +84,9 @@ body{
     cursor: pointer;
     text-align: center;
 }
-
+.header .icons .log{
+  right: 600px;
+}
 .header .icons div:hover{
     background: var(--red);
     color:#fff;

@@ -49,11 +49,104 @@ section{
     background: none;
     text-align: center;
 }
-
 .btn:hover{
     background: var(--red);
     color:#fff;
 }
+/*Sau khi dang nhap*/
+.action{
+    position: fixed;
+    top: 20px;
+    right: 170px;
+}
+.action .profile{
+    position: relative;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.action .profile img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.action .list {
+    position: absolute;
+    top: 120px;
+    right: -20px;
+    padding: 10px 20px;
+    background: rgb(250, 250, 250);
+    width: 200px;
+    box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    box-shadow: 10px black;
+}
+.action .list.active{
+    top: 80px;
+    visibility: visible;
+    opacity: 1;
+}
+.action .list::before{
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 28px;
+    width: 20px;
+    height: 20px;
+    background: rgb(250, 250, 250);
+    transform: rotate(45deg);
+}
+.action .list h3{
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0;
+    font-weight: 500;
+    font-size: 25px;
+    color: #555;
+    line-height: 1.2em;
+}
+.action .list h3 span{
+    font-size: 14px;
+    color: #cecece;
+    font-weight: 400;
+}
+.action .list ul li{
+    list-style: none;
+    font-size: 15px;
+    padding: 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+}
+.action .list ul li img{
+    max-width: 20px;
+    margin-right: 10px;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+.action .list ul li:hover img{
+    opacity: 1;
+}
+.action .list ul li a{
+    display: inline-block;
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: 0.5s;
+}
+.action .list ul li:hover a{
+    color: var(--red);
+}
+/**/
 .header{
     position: fixed;
     top:0; left:0; right: 0;
