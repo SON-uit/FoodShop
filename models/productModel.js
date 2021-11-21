@@ -8,9 +8,9 @@ const imageSchema = new mongoose.Schema({
     type: String,
   }    
 })
-imageSchema.virtual('thumbnail').get(function(){
+/* imageSchema.virtual('thumbnail').get(function(){
   return this.url.replace('/upload','/upload/w_180,h_180');
-})
+}) */
 const productSchema = new mongoose.Schema({
   name: {
     type: String,

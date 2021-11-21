@@ -13,33 +13,22 @@
           <img id="main-img" src="<%= product.images[0].url %>" alt="<%= product.slug %>" />
         </div>
         <p class="thumbBar">
-          <img id="1" src="<%= product.images[0].url %>" alt="<%= product.slug %>" />
-          <img id="2" src="<%= product.images[0].url %>" alt="<%= product.slug %>" />
-          <img id="3" src="<%= product.images[0].url %>" alt="<%= product.slug %>" />
+          <% for (let img of product.images) {%> 
+          <img src="<%= img.url %>" alt="<%= product.slug %>" />
+          <% } %> 
         </p>
       </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>
-        $(()=> {
-          $('p img').click(function(){
-            /*console.log($(this).attr('id'));*/
-            let imgPath = $(this).attr('src');
-            $('#main-img').attr('src',imgPath);
-          })
-        })
-      </script>
       <div class="field-content">
         <div class="field-breadcrumb">
           <ul class="breadcrumb">
-            <li><a href="#">Trang chủ</a></li>
-            <li><a href="#">Menu</a></li>
+            <li><a href="/home">Trang chủ</a></li>
+            <li><a href="/products">Menu</a></li>
             <li><%= product.name %> </li>
           </ul>
         </div>
         <h2 style="margin-top:16px"><%= product.name %></h2>
         <div class="field-price">
-          <span><%= product.price %> </span>
-          <span>₫</span>
+          <span><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price) %> </span>
         </div>
         <div class="field-note">
           <div class="field-text">
@@ -53,4 +42,16 @@
     </div>
   </div>
 </div>
+<script>
+  //Change Images
+  const thumbBar = document.querySelector('.thumbBar')
+  const mainImg = document.querySelector('#main-img')
+  thumbBar.addEventListener('click', function (e) {
+    mainImg.src = e.target.src;
+  })
+  //Change text description
+  const fieldText = document.querySelector('.field-text p');
+  const description = document.querySelector('.field-text p').textContent;
+  fieldText.innerHTML = description.replace(/&n/g, '<br> <br>')
+</script>
 

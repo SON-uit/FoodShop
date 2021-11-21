@@ -69,28 +69,34 @@ async function addCart(id) {
     console.log(error)
   }
 }
-function deleteItems(id) {
-  const idProduct = id;
-  axios
-    .get(`api/product/deleteItem/${idProduct}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function deleteItems (id) {
+  try {
+    const idProduct = id;
+    const response  = await axios({
+      method: "GET",
+      url: "http://localhost:3000/api/product/deleteItem/"+idProduct,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
-function changeQtyItems(el) {
-  axios
-    .get(`api/product/editQtyItem/${el.id}/qty/${el.value}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function changeQtyItems (el) {
+  try {
+    const response  = await axios({
+      method: "GET",
+      url: `http://localhost:3000/api/product/editQtyItem/${el.id}/qty/${el.value}`,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
 //LOG OUT USER
 const btnLogout = document.querySelector('.btn-logout');

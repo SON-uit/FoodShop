@@ -120,7 +120,9 @@ const insertHTMLdishses = function (data) {
     "vi-VN",
     { style: "currency", currency: "VND" }
   ).format(data.price)}</span>
-    <img src="${data.images[0].url}" alt="${data.slug}">
+    <a href="/product/${data.slug}">
+      <img src="${data.images[0].url}" alt="${data.slug}">
+    </a>
     <h3>${data.name}</h3>
     <div class="stars">
         <i class="fas fa-star"></i>
@@ -129,7 +131,7 @@ const insertHTMLdishses = function (data) {
         <i class="fas fa-star"></i>
         <i class="fas fa-star"></i>
     </div>
-    <button class="btn" onclick="addCart('${data.id}')">đặt hàng ngay</button>
+    <button class="btn" onclick="addCart('${data._id}')">đặt hàng ngay</button>
   </div>`;
   boxContainer.insertAdjacentHTML("beforeend", html);
 };
