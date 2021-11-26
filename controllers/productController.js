@@ -116,6 +116,7 @@ module.exports.order = catchAsync(async (req, res, next) => {
       order: order.id,
       product: product.id, 
       qty: product.qty,
+      price: product.price,
     })
   await orderProduct.save();
   })
@@ -145,8 +146,9 @@ module.exports.bestSeller = catchAsync(async (req, res, next) => {
     const product = await Product.findById(el._id);
     return product;
   }));
-  res.status(200).json({
+  res.send(result);
+  /* res.status(200).json({
     status: 'success',
     data: result,
-  })
+  }) */
 })
