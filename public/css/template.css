@@ -54,20 +54,22 @@ section{
     color:#fff;
 }
 /*Sau khi dang nhap*/
-.action{
-    position: fixed;
-    top: 20px;
-    right: 170px;
+.header .action{
+    position: sticky;
+    height: 4.5rem;
+    width: 4.5rem;
+    cursor: pointer;
+    text-align: center;
 }
-.action .profile{
+.header .action .profile{
     position: relative;
-    width: 45px;
-    height: 45px;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
     overflow: hidden;
     cursor: pointer;
 }
-.action .profile img{
+.header .action .profile img{
     position: absolute;
     top: 0;
     left: 0;
@@ -163,12 +165,15 @@ section{
     font-size: 2.5rem;
     font-weight: bolder;
     color:var(--black);
+    flex-grow: 2;
 }
 
 .header .logo i{
     color:var(--red);
 }
-
+.header .navbar{
+    flex-grow: 2;
+}
 .header .navbar a{
     font-size: 1.7rem;
     margin:0 1rem;
