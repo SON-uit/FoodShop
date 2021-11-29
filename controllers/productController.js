@@ -23,7 +23,7 @@ module.exports.createNewProduct = catchAsync(async (req, res, next) => {
   }
   categoryProduct.products.push(product);
   await product.save();
-  await categoryProduct.save(),
+  await categoryProduct.save();
   res.status(200).json({
     status: 'success',
     data: product,
@@ -147,8 +147,4 @@ module.exports.bestSeller = catchAsync(async (req, res, next) => {
     return product;
   }));
   res.send(result);
-  /* res.status(200).json({
-    status: 'success',
-    data: result,
-  }) */
 })

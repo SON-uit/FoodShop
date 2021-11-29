@@ -69,29 +69,36 @@ async function addCart(id) {
     console.log(error)
   }
 }
-function deleteItems(id) {
-  const idProduct = id;
-  axios
-    .get(`api/product/deleteItem/${idProduct}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function deleteItems (id) {
+  try {
+    const idProduct = id;
+    const response  = await axios({
+      method: "GET",
+      url: "http://localhost:3000/api/product/deleteItem/"+idProduct,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
-function changeQtyItems(el) {
-  axios
-    .get(`api/product/editQtyItem/${el.id}/qty/${el.value}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function changeQtyItems (el) {
+  try {
+    const response  = await axios({
+      method: "GET",
+      url: `http://localhost:3000/api/product/editQtyItem/${el.id}/qty/${el.value}`,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
+//LOG OUT USER
 const btnLogout = document.querySelector('.btn-logout');
 const logout = async function ()  {
   try {
@@ -115,4 +122,101 @@ if (btnLogout) {
 function menuToggle(){
   const toggleMenu = document.querySelector('.list');
   toggleMenu.classList.toggle('active')
+}
+//rate - us
+const slider = document.querySelector(".slider");
+const nextBtn = document.querySelector(".next-btn");
+const prevBtn = document.querySelector(".prev-btn");
+const slides = document.querySelectorAll(".slide");
+const slideIcons = document.querySelectorAll(".slide-icon");
+const numberOfSlides = 5;
+var slideNumber = 0;
+
+nextBtn.addEventListener("click", () => {
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+  slideIcons.forEach((slideIcon) => {
+    slideIcon.classList.remove("active");
+  });
+  slideNumber++;
+
+  if (slideNumber > 4) {
+    slideNumber = 0;
+  }
+  slides[slideNumber].classList.add("active");
+  slideIcons[slideNumber].classList.add("active");
+})
+prevBtn.addEventListener("click", () => {
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+  slideIcons.forEach((slideIcon) => {
+    slideIcon.classList.remove("active");
+  });
+  slideNumber--;
+
+  if (slideNumber < 0) {
+    slideNumber = 4;
+  }
+  slides[slideNumber].classList.add("active");
+  slideIcons[slideNumber].classList.add("active");
+})
+//auto slide
+var playSlide;
+var repeater = () =>{
+  playSlide = setInterval(function(){
+    slides.forEach((slide) => {
+      slide.classList.remove("active");
+    });
+    slideIcons.forEach((slideIcon) => {
+      slideIcon.classList.remove("active");
+    });
+    slideNumber++;
+  
+    if (slideNumber > 4) {
+      slideNumber = 0;
+    }
+    slides[slideNumber].classList.add("active");
+    slideIcons[slideNumber].classList.add("active");
+  }, 4000);
+}
+repeater();
+//stop slider on mouseover
+slider.addEventListener("mouseover", () =>{
+  clearInterval(playSlide);
+});
+slider.addEventListener("mouseout", () =>{
+  repeater();
+});
+
+//nav 
+navbar = document.querySelector(".menunav").querySelectorAll("a");
+console.log(navbar);
+
+navbar.forEach(Element => {
+  Element.addEventListener("click", function(){
+    navbar.forEach(nav=>nav.classList.remove("active"))
+
+    this.classList.add("active");
+  })
+})
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
 }

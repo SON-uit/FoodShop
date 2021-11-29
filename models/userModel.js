@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+
+const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -9,6 +11,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please provide your email'],
     unique: true,
+    lowercase: true,
+    trim: true,
+    validate: {
+      validator: function (val) {
+        return emailRex.test(val);
+      },
+      message: 'Not a valid Email. Please enter a email address again',
+    },
   },
   password: {
     type: String,

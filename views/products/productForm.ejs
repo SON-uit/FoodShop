@@ -8,10 +8,10 @@
 </head>
 <body>
     <form method="post" action="/api/product"  enctype="multipart/form-data">
-        <input type="text" name="name" placeholder="name"> <br>
+        <input type="text" name="name" placeholder="name"><br>
         <input type="number" name="price" placeholder="price"> <br>
         <input type="text" name="description" placeholder="description"> <br>
-        <input type="file" name="images" placeholder="images"> <br>
+        <input type="file" name="images" placeholder="images" multiple> <br>
         <select name="category">
             <% for (let category of categories) { %>
                 <option name="category" value="<%= category.id %>"><%= category.name %> </option>

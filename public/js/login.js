@@ -22,7 +22,7 @@ const showAlert = (type, message) => {
   hideAlert();
   const markup = `<div class="alert alert--${type}">${message}</div>`;
   document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-  window.setTimeout(hideAlert, 2000);
+  window.setTimeout(hideAlert, 3000);
 }
 // HANDLE FORM
 const loginUser = async (email, password) => {
