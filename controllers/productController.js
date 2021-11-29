@@ -7,6 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 const Cart = require('../cart');
 const AppError = require('../utils/appError');
 const Email = require('../utils/sendEmail');
+const { cloudinary } = require('../cloudinary')
 module.exports.createNewProduct = catchAsync(async (req, res, next) => {
   let idCategory;
   if (req.params.categoryID) idCategory = req.params.categoryID;
@@ -48,20 +49,36 @@ module.exports.getProduct = catchAsync(async (req, res, next) => {
   });
 })
 module.exports.updateProduct = catchAsync( async (req, res, next) => {
-  const product = await Product.findByIdAndUpdate(req.params.id, req.body ,{new: true});
-  if (!product) {
+  let updatedProduct = await Product.findByIdAndUpdate(req.params.id, req.body ,{new: true});
+  if (!updatedProduct) {
     return next(new AppError ('Can\'t not found this product with this ID'), 400);
+  }
+  if (req.files) {
+    const fileImg = [];
+    for (let img of updatedProduct.images) {
+      fileImg.push(img.fileName);
+      await cloudinary.uploader.destroy(img.fileName);
+    }
+    updatedProduct = await Product.findByIdAndUpdate(req.params.id,{$pull: {images: {fileName: {$in: fileImg }}}},{new: true});
+    const newImg = req.files.map(file => ({ url: file.path, fileName: file.filename }))
+    updatedProduct.images.push(...newImg);
+    await updatedProduct.save();
+
   }
   res.status(200).json({
     status: 'success',
-    data: product,
+    data: updatedProduct,
   });
 })
 module.exports.deleteProduct = catchAsync(async (req, res, next) => {
-  const product = await Product.findByIdAndDelete(req.params.id);
+  const product = await Product.findById(req.params.id);
   if(!product) {
     return next(new AppError ('Can\'t not found this product with this ID'), 400);
   }
+  for (let img of product.images) {
+    await cloudinary.uploader.destroy(img.fileName);
+  }
+  await product.findByIdAndDelete(id);
   res.status(200).json({
     status: 'success',
     message: 'Delete success',
@@ -120,14 +137,14 @@ module.exports.order = catchAsync(async (req, res, next) => {
     })
   await orderProduct.save();
   })
-  try {
+ /*  try {
     const url = "http://localhost:3000/home";
     const data = req.session.cart;
     const sendEmail = new Email(user,url,data);
     await sendEmail.sendMail();
   } catch (err) {
     console.log(err);
-  }
+  } */
   res.clearCookie('session');
   res.status(200).json({
     status: 'success',

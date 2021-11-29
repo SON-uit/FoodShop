@@ -522,9 +522,13 @@ h5.modal-title {
 }
   
 .popular .box-container .box h3{
-    color:#333;
-    font-size: 2.5rem;
+    color: #333;
+    font-size: 2rem;
     padding-top: 1rem;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
   
 /*.popular .box-container .box .stars i{

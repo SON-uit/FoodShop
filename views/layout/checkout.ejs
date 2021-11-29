@@ -54,12 +54,14 @@
                                     </div>
                                 </div>
                             <% } %>
-                        <% } %>  
-                    <div class="cart-total">
-                        <strong class="cart-total-title">Tổng Cộng: </strong>
-                        <span class="cart-total-price"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.totalPrice)%></span>
+                            <div class="cart-total">
+                                <strong class="cart-total-title">Tổng Cộng: </strong>
+                                <span class="cart-total-price"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.totalPrice)%></span>
+                            </div>
+                        <% } else { %>
+                            <h3 style="text-align:center;padding:50px;">Giỏ hàng trống</h3>
+                        <% } %>   
                     </div>
-                </div>
                 <div>
                     <div class="input">
                         <span>Ngày và giờ</span>

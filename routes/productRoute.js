@@ -16,7 +16,7 @@ router
 router
   .route('/:id')
   .get(productController.getProduct)
-  .patch(productController.updateProduct)
+  .patch(upload.array('images'), productController.updateProduct)
   .delete(productController.deleteProduct);
 router.get('/addCart/:id', productController.addCart);
 router.get('/deleteItem/:id', productController.deleteItem);

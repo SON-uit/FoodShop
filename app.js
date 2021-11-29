@@ -63,9 +63,10 @@ const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const viewRoute = require('./routes/viewRoute');
-
+const adminRoute = require('./routes/adminRoute');
 
 app.use('/', viewRoute);
+app.use('/admin',adminRoute);
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);

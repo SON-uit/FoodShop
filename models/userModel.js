@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema({
       message: 'Incorrect password comfirm.Please try again',
     },
   },
+  role : {
+    type: String,
+    enum: ['Khách hàng','Admin'],
+    default: 'Khách hàng',
+  },
   phone: {
     type: String,
     required: [true, 'Please provide your phone number'],

@@ -52,6 +52,6 @@
   //Change text description
   const fieldText = document.querySelector('.field-text p');
   const description = document.querySelector('.field-text p').textContent;
-  fieldText.innerHTML = description.replace(/&n/g, '<br> <br>')
+  fieldText.innerHTML = description.replace(/%d/g, '<br> <br>')
 </script>
 
