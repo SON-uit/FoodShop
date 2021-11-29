@@ -1,14 +1,5 @@
-let menu = document.querySelector("#menu-bar");
-let navbar = document.querySelector(".navbar");
-
-menu.onclick = () => {
-  menu.classList.toggle("fa-times");
-  navbar.classList.toggle("active");
-};
 
 window.onscroll = () => {
-  menu.classList.remove("fa-times");
-  navbar.classList.remove("active");
   if (window.scrollY > 60) {
     document.querySelector("#scroll-top").classList.add("active");
   } else {
@@ -123,20 +114,20 @@ function menuToggle(){
   const toggleMenu = document.querySelector('.list');
   toggleMenu.classList.toggle('active')
 }
-//rate - us
-const slider = document.querySelector(".slider");
-const nextBtn = document.querySelector(".next-btn");
-const prevBtn = document.querySelector(".prev-btn");
-const slides = document.querySelectorAll(".slide");
-const slideIcons = document.querySelectorAll(".slide-icon");
-const numberOfSlides = 5;
-var slideNumber = 0;
 
-nextBtn.addEventListener("click", () => {
-  slides.forEach((slide) => {
+//rate - us
+const sliderHome = document.querySelector(".sliderHome");
+const nextBtnHome = document.querySelector(".next-btnHome");
+const prevBtnHome = document.querySelector(".prev-btnHome");
+const slidesHome = document.querySelectorAll(".slideHome");
+const slideIconsHome = document.querySelectorAll(".slide-iconHome");
+const numberOfSlidesHome = 5;
+var slideNumber = 0;
+nextBtnHome.addEventListener("click", () => {
+  slidesHome.forEach((slide) => {
     slide.classList.remove("active");
   });
-  slideIcons.forEach((slideIcon) => {
+  slideIconsHome.forEach((slideIcon) => {
     slideIcon.classList.remove("active");
   });
   slideNumber++;
@@ -144,14 +135,14 @@ nextBtn.addEventListener("click", () => {
   if (slideNumber > 4) {
     slideNumber = 0;
   }
-  slides[slideNumber].classList.add("active");
-  slideIcons[slideNumber].classList.add("active");
+  slidesHome[slideNumber].classList.add("active");
+  slideIconsHome[slideNumber].classList.add("active");
 })
-prevBtn.addEventListener("click", () => {
-  slides.forEach((slide) => {
+prevBtnHome.addEventListener("click", () => {
+  slidesHome.forEach((slide) => {
     slide.classList.remove("active");
   });
-  slideIcons.forEach((slideIcon) => {
+  slideIconsHome.forEach((slideIcon) => {
     slideIcon.classList.remove("active");
   });
   slideNumber--;
@@ -159,17 +150,17 @@ prevBtn.addEventListener("click", () => {
   if (slideNumber < 0) {
     slideNumber = 4;
   }
-  slides[slideNumber].classList.add("active");
-  slideIcons[slideNumber].classList.add("active");
+  slidesHome[slideNumber].classList.add("active");
+  slideIconsHome[slideNumber].classList.add("active");
 })
 //auto slide
 var playSlide;
 var repeater = () =>{
   playSlide = setInterval(function(){
-    slides.forEach((slide) => {
+    slidesHome.forEach((slide) => {
       slide.classList.remove("active");
     });
-    slideIcons.forEach((slideIcon) => {
+    slideIconsHome.forEach((slideIcon) => {
       slideIcon.classList.remove("active");
     });
     slideNumber++;
@@ -177,46 +168,15 @@ var repeater = () =>{
     if (slideNumber > 4) {
       slideNumber = 0;
     }
-    slides[slideNumber].classList.add("active");
-    slideIcons[slideNumber].classList.add("active");
+    slidesHome[slideNumber].classList.add("active");
+    slideIconsHome[slideNumber].classList.add("active");
   }, 4000);
 }
 repeater();
-//stop slider on mouseover
-slider.addEventListener("mouseover", () =>{
-  clearInterval(playSlide);
-});
-slider.addEventListener("mouseout", () =>{
-  repeater();
-});
-
-//nav 
-navbar = document.querySelector(".menunav").querySelectorAll("a");
-console.log(navbar);
-
-navbar.forEach(Element => {
-  Element.addEventListener("click", function(){
-    navbar.forEach(nav=>nav.classList.remove("active"))
-
-    this.classList.add("active");
-  })
-})
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
+// Smooth scroll
+const scrollTo = document.querySelectorAll('.scroll');
+scrollTo.forEach(el => el.addEventListener('click', function(e) {
+  e.preventDefault();
+  const section = document.querySelector(`#${e.target.dataset.section}`);
+  section.scrollIntoView({behavior: "smooth"});
+}));

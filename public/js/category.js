@@ -13,7 +13,7 @@
 
 window.onscroll = () => {
   /* menu.classList.remove("fa-times");
-  navbar.classList.remove("active"); */
+    navbar.classList.remove("active"); */
 
   if (window.scrollY > 60) {
     document.querySelector("#scroll-top").classList.add("active");
@@ -100,39 +100,41 @@ slider.addEventListener("mouseout", () => {
 
 //nav
 /* navbar = document.querySelector(".menunav").querySelectorAll("a");
-//console.log(navbar);
-
-navbar.forEach(Element => {
-  Element.addEventListener("click", function(){
-    navbar.forEach(nav=>nav.classList.remove("active"))
-
-    this.classList.add("active");
-  })
-}) */
+  //console.log(navbar);
+  
+  navbar.forEach(Element => {
+    Element.addEventListener("click", function(){
+      navbar.forEach(nav=>nav.classList.remove("active"))
+  
+      this.classList.add("active");
+    })
+  }) */
 
 //Menu Nav
 const menuNav = document.querySelector("#menunav");
 const boxContainer = document.querySelector(".box-container");
 const insertHTMLdishses = function (data) {
   const html = `
-  <div class="box">
-    <span class="price" data-price="${data.price}">${new Intl.NumberFormat(
+    <div class="box">
+      <span class="price" data-price="${data.price}">${new Intl.NumberFormat(
     "vi-VN",
     { style: "currency", currency: "VND" }
   ).format(data.price)}</span>
-    <a href="/product/${data.slug}">
-      <img src="${data.images[0].url}" alt="${data.slug}">
-    </a>
-    <h3>${data.name}</h3>
-    <div class="stars">
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-        <i class="fas fa-star"></i>
-    </div>
-    <button class="btn" onclick="addCart('${data._id}')">đặt hàng ngay</button>
-  </div>`;
+      <a href="/product/${data.slug}">
+        <img src="${data.images[0].url}" alt="${data.slug}">
+      </a>
+      <h3>${data.name}</h3>
+      <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+      </div>
+      <button class="btn" onclick="addCart('${
+        data._id
+      }')">đặt hàng ngay</button>
+    </div>`;
   boxContainer.insertAdjacentHTML("beforeend", html);
 };
 const getCategory = async (id) => {
@@ -185,7 +187,7 @@ menuNav.addEventListener("click", function (e) {
 });
 
 /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
+  toggle between hiding and showing the dropdown content */
 const sort = document.querySelector("#sort");
 function myFunction() {
   sort.classList.toggle("show");
@@ -219,14 +221,14 @@ sort.addEventListener("click", function (e) {
   }
   sort.classList.remove("show");
   // Check if don't have product with sort
-  const temp = [...products]
-  if(temp.every(el => el.style.display === "none")) {
-    const message = document.createElement('h2');
-    message.textContent = 'Không tìm thấy kết quả';
+  const temp = [...products];
+  if (temp.every((el) => el.style.display === "none")) {
+    const message = document.createElement("h2");
+    message.textContent = "Không tìm thấy kết quả";
     boxContainer.append(message);
   } else {
-    if (boxContainer.hasChildNodes('h2')) {
-      const h2 = boxContainer.querySelector('h2');
+    if (boxContainer.hasChildNodes("h2")) {
+      const h2 = boxContainer.querySelector("h2");
       boxContainer.removeChild(h2);
     }
   }
@@ -250,7 +252,7 @@ for (let temp of sortApha) {
   temp.addEventListener("click", function (e) {
     const typeSort = e.target.dataset.sort * 1;
     const products = [].slice.call(boxContainer.querySelectorAll(".box"));
-    products.forEach(el => el.style.display ='block');
+    products.forEach((el) => (el.style.display = "block"));
     boxContainer.innerHTML = "";
     if (typeSort === 1) {
       sortProduct(products, 1);

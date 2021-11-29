@@ -53,7 +53,7 @@ module.exports.updateProduct = catchAsync( async (req, res, next) => {
   if (!updatedProduct) {
     return next(new AppError ('Can\'t not found this product with this ID'), 400);
   }
-  if (req.files) {
+  if (req.files.length > 0) {
     const fileImg = [];
     for (let img of updatedProduct.images) {
       fileImg.push(img.fileName);
