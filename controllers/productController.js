@@ -25,10 +25,11 @@ module.exports.createNewProduct = catchAsync(async (req, res, next) => {
   categoryProduct.products.push(product);
   await product.save();
   await categoryProduct.save();
-  res.status(200).json({
+  /* res.status(200).json({
     status: 'success',
     data: product,
-  })
+  }) */
+  res.redirect('/admin/dashboard');
 });
 module.exports.getAllProduct = catchAsync(async (req, res, next) => {
   const products = await Product.find();
@@ -65,10 +66,11 @@ module.exports.updateProduct = catchAsync( async (req, res, next) => {
     await updatedProduct.save();
 
   }
-  res.status(200).json({
+ /*  res.status(200).json({
     status: 'success',
     data: updatedProduct,
-  });
+  }); */
+  res.redirect('/admin/dashboard');
 })
 module.exports.deleteProduct = catchAsync(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
@@ -137,14 +139,14 @@ module.exports.order = catchAsync(async (req, res, next) => {
     })
   await orderProduct.save();
   })
- /*  try {
+  try {
     const url = "http://localhost:3000/home";
     const data = req.session.cart;
     const sendEmail = new Email(user,url,data);
     await sendEmail.sendMail();
   } catch (err) {
     console.log(err);
-  } */
+  }
   res.clearCookie('session');
   res.status(200).json({
     status: 'success',

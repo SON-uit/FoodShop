@@ -29,7 +29,7 @@ module.exports.order = catchAsync(async (req, res) => {
   const orders = await Order.find().populate({
     path: "user",
     select: "username -_id",
-  }).sort({date: 1});
+  });
   res.render('admin/order', {orders});
 })
 module.exports.orderDetails = catchAsync(async (req, res) => {

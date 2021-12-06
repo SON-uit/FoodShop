@@ -7,6 +7,7 @@ const orderModel = new mongoose.Schema({
   },
   message: {
     type: String,
+    default: "No message",
     required: true,
   },
   phone: {

@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/css/order.css">
 <section class="order" id="order">
     <div>
-        <h1 class="heading"><span>Order Now</span></h1>
+        <h1 class="heading"><span>Đặt Hàng</span></h1>
     </div>
     <div class="row"> 
         <% if(user!== null) { %> 
@@ -11,7 +11,7 @@
                 <div class="input">
                     <span>Tên</span>
                     <input type="text" placeholder="name" value="<%=user.username%>" name="username">
-                    <span>Tên</span>
+                    <span>Email</span>
                     <input type="email" placeholder="email" value= "<%=user.email%>" name="email">
                 </div>
                 <div class="input">
@@ -34,7 +34,7 @@
         <form action="">
             <div id="myModal" class="inputBox">
                 <div class="modal-body">
-                    <span>Your order</span>
+                    <span>Đơn Hàng Của Bạn</span>
                     <div class="cart-row">
                         <span class="cart-item cart-header cart-column">Sản Phẩm</span>
                         <span class="cart-price cart-header cart-column">Giá</span>
@@ -128,7 +128,7 @@ btnOrder.addEventListener('click', function(e) {
   const email = document.querySelector('input[name="email"]').value;
   const phone = document.querySelector('input[name="phone"]').value;
   const address = document.querySelector('textarea[name="address"]').value;
-  const message = document.querySelector('textarea[name="message"]').value;
+  const message = document.querySelector('textarea[name="message"]').value || 'No message';
   const date = document.querySelector('input[name="date"]').value;
   order({username,email,phone,address,message,date});
 })
