@@ -64,6 +64,18 @@ module.exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser
   next();
 })
+module.exports.restrictTo =
+  (...roles) =>
+  // roles = [admin,user,guide];
+  (req, res, next) => {
+    //console.log(roles);
+    if (!roles.includes(req.user.role)) {
+      return next(new AppError('You are not allow to acess this route'), 403);
+      //403 :authorization error
+    }
+    next();
+    //cach truyen tham so vao vao middleware function la tra ve 1 function req,res,next
+  };
 module.exports.isLogin = async (req, res, next) => {
   const token = req.cookies.jwt;
   if (!token) {
@@ -85,6 +97,18 @@ module.exports.isLogin = async (req, res, next) => {
     next();
   }
 };
+module.exports.loginAdmin = catchAsync(async (req, res, next) => {
+  const { email , password } = req.body;
+  if (!email || !password) {
+    return next(new AppError('Please provide email and password',404));
+  }
+  const user = await User.findOne({email: email});
+  if (!user || !(await user.comparePassword(password, user.password)) ) {
+    return next(new AppError('Email or passwornd incorrect.Try again',404))
+  };
+  if (user.role !== 'Admin') return next(new AppError('Please login with admin account'),403);
+  sendJWTtoken(res, user, 200);
+})
 module.exports.logout = (req, res) => {
   //Xoa session
   res.clearCookie("session");

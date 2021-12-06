@@ -1,14 +1,5 @@
-let menu = document.querySelector("#menu-bar");
-let navbar = document.querySelector(".navbar");
-
-menu.onclick = () => {
-  menu.classList.toggle("fa-times");
-  navbar.classList.toggle("active");
-};
 
 window.onscroll = () => {
-  menu.classList.remove("fa-times");
-  navbar.classList.remove("active");
   if (window.scrollY > 60) {
     document.querySelector("#scroll-top").classList.add("active");
   } else {
@@ -69,29 +60,36 @@ async function addCart(id) {
     console.log(error)
   }
 }
-function deleteItems(id) {
-  const idProduct = id;
-  axios
-    .get(`api/product/deleteItem/${idProduct}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function deleteItems (id) {
+  try {
+    const idProduct = id;
+    const response  = await axios({
+      method: "GET",
+      url: "http://localhost:3000/api/product/deleteItem/"+idProduct,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
-function changeQtyItems(el) {
-  axios
-    .get(`api/product/editQtyItem/${el.id}/qty/${el.value}`)
-    .then((response) => {
-      Cart.innerHTML = "";
-      Cart.innerHTML = response.data;
-      showCart();
-      popup();
+async function changeQtyItems (el) {
+  try {
+    const response  = await axios({
+      method: "GET",
+      url: `http://localhost:3000/api/product/editQtyItem/${el.id}/qty/${el.value}`,
     })
-    .catch((error) => console.log(error));
+    Cart.innerHTML = "";
+    Cart.innerHTML = response.data;
+    showCart();
+    popup();
+  } catch (error) {
+    console.log(error)
+  }
 }
+//LOG OUT USER
 const btnLogout = document.querySelector('.btn-logout');
 const logout = async function ()  {
   try {
@@ -116,3 +114,69 @@ function menuToggle(){
   const toggleMenu = document.querySelector('.list');
   toggleMenu.classList.toggle('active')
 }
+
+//rate - us
+const sliderHome = document.querySelector(".sliderHome");
+const nextBtnHome = document.querySelector(".next-btnHome");
+const prevBtnHome = document.querySelector(".prev-btnHome");
+const slidesHome = document.querySelectorAll(".slideHome");
+const slideIconsHome = document.querySelectorAll(".slide-iconHome");
+const numberOfSlidesHome = 5;
+var slideNumber = 0;
+nextBtnHome.addEventListener("click", () => {
+  slidesHome.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+  slideIconsHome.forEach((slideIcon) => {
+    slideIcon.classList.remove("active");
+  });
+  slideNumber++;
+
+  if (slideNumber > 4) {
+    slideNumber = 0;
+  }
+  slidesHome[slideNumber].classList.add("active");
+  slideIconsHome[slideNumber].classList.add("active");
+})
+prevBtnHome.addEventListener("click", () => {
+  slidesHome.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+  slideIconsHome.forEach((slideIcon) => {
+    slideIcon.classList.remove("active");
+  });
+  slideNumber--;
+
+  if (slideNumber < 0) {
+    slideNumber = 4;
+  }
+  slidesHome[slideNumber].classList.add("active");
+  slideIconsHome[slideNumber].classList.add("active");
+})
+//auto slide
+var playSlide;
+var repeater = () =>{
+  playSlide = setInterval(function(){
+    slidesHome.forEach((slide) => {
+      slide.classList.remove("active");
+    });
+    slideIconsHome.forEach((slideIcon) => {
+      slideIcon.classList.remove("active");
+    });
+    slideNumber++;
+  
+    if (slideNumber > 4) {
+      slideNumber = 0;
+    }
+    slidesHome[slideNumber].classList.add("active");
+    slideIconsHome[slideNumber].classList.add("active");
+  }, 4000);
+}
+repeater();
+// Smooth scroll
+const scrollTo = document.querySelectorAll('.scroll');
+scrollTo.forEach(el => el.addEventListener('click', function(e) {
+  e.preventDefault();
+  const section = document.querySelector(`#${e.target.dataset.section}`);
+  section.scrollIntoView({behavior: "smooth"});
+}));

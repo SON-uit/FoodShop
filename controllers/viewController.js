@@ -31,6 +31,10 @@ module.exports.details = catchAsync(async(req, res) => {
   const product = await Product.findOne({ slug: req.params.slug});
   res.render('layout/productDetails', {product});
 })
+module.exports.checkLogin = (req, res, next) => {
+  if (!req.user) return res.redirect('/signup');
+  next();
+}
 module.exports.checkout = (req , res) => {
   res.render('layout/checkout');
 } 

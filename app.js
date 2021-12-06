@@ -9,7 +9,6 @@ const session = require('express-session')
 const cookieParser = require('cookie-parser'); // phan tich cu phap cookies
 const MongoStore = require('connect-mongo');
 const gobalHandlingError = require('./controllers/errorHandling');
-const axios = require('axios');
 const app = express()
 const port = 3000
 dotenv.config({ path: './.env' });
@@ -47,10 +46,9 @@ const sessionConfig = {
 app.use(morgan('dev'));
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
+app.engine('ejs',ejsMate);
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
-app.use(morgan('dev'));
-app.engine('ejs',ejsMate);
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(session(sessionConfig));
@@ -65,9 +63,10 @@ const userRoute = require('./routes/userRoute');
 const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const viewRoute = require('./routes/viewRoute');
-
+const adminRoute = require('./routes/adminRoute');
 
 app.use('/', viewRoute);
+app.use('/admin',adminRoute);
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);

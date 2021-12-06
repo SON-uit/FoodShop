@@ -234,6 +234,10 @@ hr{
   color: #333;
   font-size: 2rem;
   padding-top: 1rem;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dishes .box-container .box .stars i {

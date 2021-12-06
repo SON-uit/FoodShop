@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css" href="/css/order.css">
 <section class="order" id="order">
     <div>
-        <h1 class="heading"><span>Order Now</span></h1>
+        <h1 class="heading"><span>Đặt Hàng</span></h1>
     </div>
     <div class="row"> 
         <% if(user!== null) { %> 
@@ -11,8 +11,8 @@
                 <div class="input">
                     <span>Tên</span>
                     <input type="text" placeholder="name" value="<%=user.username%>" name="username">
-                    <span>Tên</span>
-                    <input type="email" placeholder="email" value= "<%=user.email%>" name="email"> >
+                    <span>Email</span>
+                    <input type="email" placeholder="email" value= "<%=user.email%>" name="email">
                 </div>
                 <div class="input">
                     <span>Số điện thoại</span>
@@ -34,7 +34,7 @@
         <form action="">
             <div id="myModal" class="inputBox">
                 <div class="modal-body">
-                    <span>Your order</span>
+                    <span>Đơn Hàng Của Bạn</span>
                     <div class="cart-row">
                         <span class="cart-item cart-header cart-column">Sản Phẩm</span>
                         <span class="cart-price cart-header cart-column">Giá</span>
@@ -51,16 +51,17 @@
                                     <span class="cart-price cart-column"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price)  %></span>
                                     <div class="cart-quantity cart-column">
                                         <input class="cart-quantity-input" type="number" value="<%= product.qty %>" readonly>
-                                        <button class="btn btn-danger" type="button">Xóa</button>
                                     </div>
                                 </div>
                             <% } %>
-                        <% } %>  
-                    <div class="cart-total">
-                        <strong class="cart-total-title">Tổng Cộng: </strong>
-                        <span class="cart-total-price"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.totalPrice)%></span>
+                            <div class="cart-total">
+                                <strong class="cart-total-title">Tổng Cộng: </strong>
+                                <span class="cart-total-price"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.totalPrice)%></span>
+                            </div>
+                        <% } else { %>
+                            <h3 style="text-align:center;padding:50px;">Giỏ hàng trống</h3>
+                        <% } %>   
                     </div>
-                </div>
                 <div>
                     <div class="input">
                         <span>Ngày và giờ</span>
@@ -68,14 +69,42 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="order" type="button" class="btn order">Thanh Toán</button>
+                    <button type="button" id ="order" class="btn order">Đặt hàng</button>
                 </div>  
             </div>
         </form>
     </div>
+    <% if (cart) { %> 
+    <div class="modal modalOrdered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center">Đã đặt hàng thành công</h5>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items">
+                    <% for ( product of cart.listProduct) { %> 
+                        <div class="cart-row">
+                            <div class="cart-item cart-column">
+                                <img class="cart-item-image" src="<%= product.info.images[0].url %>" alt="<%= product.slug %> " width="100" height="100">
+                                <span class="cart-item-title"><%= product.name %> </span>
+                            </div>
+                        </div>
+                    <% } %> 
+                </div>
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title" >Vui lòng kiểm tra đơn đặt hàng của bạn trong email</h5>
+            </div>
+        </div>
+    </div>
+    <% } %> 
 </section>
 <script>
 const btnOrder = document.querySelector('button[id="order"]');
+const modal = document.querySelector(".modalOrdered")
+const showOrdered = function () {
+    modal.classList.add('open')
+}
 const order = async function (data) {
   try {
     const response = await axios({
@@ -84,10 +113,10 @@ const order = async function (data) {
         data,
     })
     if (response.data.status === 'success') {
-       alert(response.data.message);
+       showOrdered();
        window.setTimeout(() => {
          location.assign('/home')
-       }, 1000);
+       }, 5000);
     }
   } catch (error) {
     alert(error);
@@ -99,8 +128,9 @@ btnOrder.addEventListener('click', function(e) {
   const email = document.querySelector('input[name="email"]').value;
   const phone = document.querySelector('input[name="phone"]').value;
   const address = document.querySelector('textarea[name="address"]').value;
-  const message = document.querySelector('textarea[name="message"]').value;
+  const message = document.querySelector('textarea[name="message"]').value || 'No message';
   const date = document.querySelector('input[name="date"]').value;
   order({username,email,phone,address,message,date});
 })
 </script>
+

@@ -7,6 +7,7 @@ const orderModel = new mongoose.Schema({
   },
   message: {
     type: String,
+    default: "No message",
     required: true,
   },
   phone: {
@@ -27,7 +28,7 @@ const orderModel = new mongoose.Schema({
   },
   date : {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   }
 })
 const Order = mongoose.model('Order', orderModel);

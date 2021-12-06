@@ -3,32 +3,33 @@
     <nav class="navbar">
         <a href="/home">Trang chủ</a>
         <a href="/products">Đồ ăn</a>
-        <a href="#popular">Phổ biến</a>
-        <a href="aboutus">Về chúng tôi</a>
-        <a href="#contact">Liên hệ</a>
-        <a href="#danhgia">Đánh giá</a>
+        <a href="#popular" class="scroll" data-section = "popular">Phổ biến</a>
+        <a href="aboutus"  class="scroll" data-section="about-us">Về chúng tôi</a>
+        <a href="#contact" class="scroll" data-section="contact">Liên hệ</a>
+        <a href="#rate-us" class="scroll" data-section="rate-us">Đánh giá</a>
     </nav>
     <div id="menu-bar" class="fas fa-bars"></div>
-    <div class="icons">
-        <div class="fas fa-shopping-cart" id="cart-btn"></div>
-    </div>
     <% if (user !== null) { %> 
+        <div class="icons">
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+        </div>
         <div class="action">
             <div class="profile" onclick="menuToggle();">
-                <img src="img/user.png">
+                <img src="/img/user.png">
             </div>
             <div class="list">
-                <h3>Anh Phạm<br><span>Khách hàng</span></h3>
+                <h3><%= user.username%> <br><span><%= user.role%></span></h3>
                 <ul>
-                    <li><img src="img/profile.png"><a href="#">Thông tin</a></li>
-                    <li><img src="img/question.png"><a href="#">Hỏi đáp</a></li>
-                    <li><img src="img/settings.png"><a href="#">Cài đặt</a></li>
-                    <li class="btn-logout"><img src="img/log-out.png"><a href="#">Log Out</a></li>
+                    <li><img src="/img/profile.png"><a href="#">Thông tin</a></li>
+                    <li><img src="/img/question.png"><a href="#">Hỏi đáp</a></li>
+                    <li><img src="/img/settings.png"><a href="#">Cài đặt</a></li>
+                    <li class="btn-logout"><img src="/img/log-out.png"><a href="#">Log Out</a></li>
                 </ul>
             </div>
         </div>
     <% } else { %>
-        <div class="icons log">
+        <div class="icons">
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
             <a href="/signup"><div class="fas fa-user" id="login-btn"></div></a>
         </div>
     <% } %>   
@@ -81,7 +82,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn close-footer">Đóng</button>
-                    <a href="/checkout"><button type="button" class="btn order">Thanh Toán</button></a>
+                    <a href="/checkout"><button type="button" class="btn order">Đặt Hàng</button></a>
                 </div>
             </div>
         </div>

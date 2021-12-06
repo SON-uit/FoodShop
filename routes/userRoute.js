@@ -10,7 +10,7 @@ router.route('/login')
   .get(userController.loginForm)
   .post(authController.login)
 router.get('/logout', authController.logout);
-  router.get('/home', authController.isLogin, (req,res) =>{
+ /*  router.get('/home', authController.isLogin, (req,res) =>{
     res.send("hello");
-})
+}) */
 module.exports = router;
