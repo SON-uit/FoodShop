@@ -17,7 +17,21 @@
                 <div class="input">
                     <span>Số điện thoại</span>
                     <input type="text" placeholder="number" value= "<%= user.phone %>" name="phone">
-                </div>  
+                </div>
+                <% if (paymentStatus === undefined ||  paymentStatus ==='failed') {%> 
+                <div class="input"> 
+                    <span>Phương thức thanh toán</span>
+                    <input type="radio" id="cod" name="payment" value="COD" >
+                    <label for="html">COD (Thanh toan khi nhan hang)</label><br>
+                    <input type="radio" id="banking" name="payment" value="banking">
+                    <label for="css">banking</label><br>
+                </div>
+                <% } %> 
+                <% if (paymentStatus!== undefined) { %> 
+                <div class="input">
+                    <input class="paymentStatus" type="hidden" placeholder="paymentStatus" value= "<%=paymentStatus%>" name="phone">
+                </div>
+                <% } %>
             </div>
             <div class="inputBox">
                 <div class="input">
@@ -99,38 +113,5 @@
     </div>
     <% } %> 
 </section>
-<script>
-const btnOrder = document.querySelector('button[id="order"]');
-const modal = document.querySelector(".modalOrdered")
-const showOrdered = function () {
-    modal.classList.add('open')
-}
-const order = async function (data) {
-  try {
-    const response = await axios({
-        url: 'http://localhost:3000/api/product/order',
-        method: 'POST',
-        data,
-    })
-    if (response.data.status === 'success') {
-       showOrdered();
-       window.setTimeout(() => {
-         location.assign('/home')
-       }, 5000);
-    }
-  } catch (error) {
-    alert(error);
-  }
-}
-btnOrder.addEventListener('click', function(e) {
-  e.preventDefault();
-  const username = document.querySelector('input[name="username"]').value;
-  const email = document.querySelector('input[name="email"]').value;
-  const phone = document.querySelector('input[name="phone"]').value;
-  const address = document.querySelector('textarea[name="address"]').value;
-  const message = document.querySelector('textarea[name="message"]').value || 'No message';
-  const date = document.querySelector('input[name="date"]').value;
-  order({username,email,phone,address,message,date});
-})
-</script>
-
+<script src="https://js.stripe.com/v3/"></script>   
+<script src="/js/checkout.js">

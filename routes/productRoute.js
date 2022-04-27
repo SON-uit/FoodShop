@@ -21,6 +21,5 @@ router
 router.get('/addCart/:id', productController.addCart);
 router.get('/deleteItem/:id', productController.deleteItem);
 router.get('/editQtyItem/:id/qty/:qty', productController.editQtyItem);
-router.post('/order', productController.order);
 
 module.exports = router;
