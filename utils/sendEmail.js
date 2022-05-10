@@ -1,7 +1,5 @@
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
-//const htmlToText = require('html-to-text');
-
 module.exports = class Email {
   constructor(user, url , data) {
     this.to = user.email;
@@ -9,17 +7,10 @@ module.exports = class Email {
     // luu y gui email tu dau
     this.url = url
     this.data = data
-    //this.from = process.env.SENDGRID_EMAIL_FROM;
     this.from = 'sonnguyen@gmail.com';
   }
   newTransporter() {
-    //sendgrid
     return nodemailer.createTransport({
-     /*  service: 'SendGrid',
-      auth: {
-        user: process.env.SENDGRID_USERNAME,
-        pass: process.env.SENDGRID_PASSWORD,
-      }, */
       host: "smtp.mailtrap.io",
       port: 2525,
       auth: {

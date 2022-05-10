@@ -18,6 +18,10 @@ const orderModel = new mongoose.Schema({
     type:String,
     required:true,
   },
+  payment: {
+    type:String,
+    required:true,
+  },
   totalPrice: {
     type: Number,
     required: [true, 'Please provide name of category'],

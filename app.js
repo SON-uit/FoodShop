@@ -64,13 +64,16 @@ const productRoute = require('./routes/productRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const viewRoute = require('./routes/viewRoute');
 const adminRoute = require('./routes/adminRoute');
-
+const checkoutRoute = require('./routes/checkoutRoute');
 app.use('/', viewRoute);
 app.use('/admin',adminRoute);
 app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);
+app.use('/api/checkout',checkoutRoute);
 
+const checkoutMomo = require('./controllers/checkoutMomo');
+app.get('/test/momo',checkoutMomo.getCheckoutMomo)
 // ERROR HANDLING MIDDELWARE
 app.use(gobalHandlingError);
-app.listen(port, () => console.log(`Example app listening on 3000 port!`))
+app.listen(process.env.PORT || port, () => console.log(`Example app listening on 3000 port!`))

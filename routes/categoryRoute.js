@@ -1,18 +1,18 @@
 const express = require('express');
-const route = express.Router();
+const router = express.Router();
 const categoryController = require('../controllers/categoryController');
 const productRoute = require('./productRoute');
 //category/3132412/product/
 
-route.use('/:categoryID/product', productRoute);   
+router.use('/:categoryID/product', productRoute);   
 
-route
+router
   .route('/')
   .get(categoryController.getAllCategory)
   .post(categoryController.creatNewCategory);
-route
+router
   .route('/:id')
   .get(categoryController.getCategory)
   .patch(categoryController.updateCategory);
 
-module.exports = route;
+module.exports = router;

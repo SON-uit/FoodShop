@@ -29,7 +29,7 @@ const loginUser = async (email, password) => {
   try {
   const response = await axios ({
     method: 'POST',
-    url:'http://localhost:3000/api/user/login',
+    url:`${baseURL}/api/user/login`,
     data: {
       email,
       password,
@@ -38,7 +38,7 @@ const loginUser = async (email, password) => {
   if (response.data.status === 'success'){
     showAlert('success', 'Login Successfully');
     window.setTimeout(() => {
-      location.assign('/home')
+      location.assign('home')
     }, 1000);
   }
   } catch (err) {
@@ -56,7 +56,7 @@ const registerUser = async (data) => {
   try {
   const response = await axios ({
     method: 'POST',
-    url:'http://localhost:3000/api/user/signup',
+    url:`${baseURL}/api/user/signup`,
     data,
   })
   if (response.data.status === 'success'){
