@@ -1,9 +1,16 @@
 const express = require('express');
-const route = express.Router();
+const router = express.Router();
 const checkoutController = require('../controllers/checkoutController')
 const authController = require('../controllers/authController');
 
+const checkoutMomo = require('../controllers/checkoutMomo');
+
+
+
+
 //route.use(authController.protect);
-route.get('/checkout-session',authController.isLogin,checkoutController.getCheckoutSession)
-route.post('/createCheckout',checkoutController.createCheckout)
-module.exports = route;
+router.get('/checkout-session',authController.isLogin,checkoutController.getCheckoutSession)
+router.post('/createCheckout',checkoutController.createCheckout)
+
+router.get('/checkout-momo',checkoutMomo.getCheckoutMomo)
+module.exports = router;

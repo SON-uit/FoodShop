@@ -25,16 +25,14 @@
   margin: 0 auto;
   padding: 1.5rem;
 }
-.order .row form .inputBox {
-  display: grid;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.order .row form .inputBox  {
+
 }
 .order .row form .inputBox .input {
   width: 100%;
 }
 
-.order form .inputBox span {
+.order form .inputBox span , .inputBox label {
   display: block;
   padding: 0.5rem 0;
   font-size: 1.5rem;
@@ -125,4 +123,18 @@
 }
 .alert--failed {
   background-color: #eb4d4b;
+}
+.paymentContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.paymentContainer span {
+  flex: 1;
+  margin-left: 15px;
+}
+.paymentContainer img {
+  width: 100%;
+  height: 60px;
 }

@@ -38,7 +38,7 @@ const loginUser = async (email, password) => {
   if (response.data.status === 'success'){
     showAlert('success', 'Login Successfully');
     window.setTimeout(() => {
-      location.assign('/home')
+      location.assign('home')
     }, 1000);
   }
   } catch (err) {

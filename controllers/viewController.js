@@ -42,7 +42,7 @@ module.exports.checkout = (req, res) => {
     const paymentStatus = req.query.paymentStatus;
     res.render("layout/checkout", { paymentStatus});
   } else {
-  res.render("layout/checkout", { paymentStatus: undefined });
+    res.render("layout/checkout", { paymentStatus: undefined });
   }
 };
 module.exports.products = catchAsync(async (req, res) => {

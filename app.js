@@ -71,6 +71,9 @@ app.use('/api/user', userRoute);
 app.use('/api/product', productRoute);
 app.use('/api/category', categoryRoute);
 app.use('/api/checkout',checkoutRoute);
+
+const checkoutMomo = require('./controllers/checkoutMomo');
+app.get('/test/momo',checkoutMomo.getCheckoutMomo)
 // ERROR HANDLING MIDDELWARE
 app.use(gobalHandlingError);
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on 3000 port!`))
