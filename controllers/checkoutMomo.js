@@ -10,9 +10,9 @@ function createSign(rawSignature, secretKey) {
 }
 module.exports.getCheckoutMomo = async (req, res) => {
   const cart = req.session.cart;
-  const partnerCode = "MOMO99WT20220426";
-  const accessKey = "IO4GsldfFEmqCyZK";
-  const secretkey = "Yb3sbGiljB8hfzN0CgKIEGpDz51CwXtm";
+  const partnerCode = process.env.MOMO_PARTNER_CODE;
+  const accessKey = process.env.MOMO_ACCESSKEY;
+  const secretkey = process.env.MOMO_SECRETKEY;
   const requestId = partnerCode + new Date().getTime();
   const orderId = `Order${new Date().getTime().toString()}`;
   const orderInfo = "pay with MoMo";
